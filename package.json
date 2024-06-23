@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^4.2.8",
     "aws-amplify": "^6.3.7",
     "nuxt": "^3.12.2",
     "vue": "^3.4.29",
