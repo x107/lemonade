@@ -1,6 +1,4 @@
 import type { CookieRef } from 'nuxt/app';
-import type { Schema } from '~/amplify/data/resource';
-import type { ListPaginateWithPathInput } from 'aws-amplify/storage';
 import type {
     LibraryOptions,
     FetchAuthSessionOptions
@@ -17,8 +15,6 @@ import {
     fetchUserAttributes,
     getCurrentUser
 } from 'aws-amplify/auth/server';
-import { list } from 'aws-amplify/storage/server';
-
 import outputs from '../amplify_outputs.json';
 
 const amplifyConfig = parseAmplifyConfig(outputs);
@@ -136,20 +132,6 @@ export default defineNuxtPlugin({
                                 libraryOptions,
                                 (contextSpec) => getCurrentUser(contextSpec)
                             )
-                    },
-                    Storage: {
-                        list: (input: ListPaginateWithPathInput) =>
-                            runWithAmplifyServerContext(
-                                amplifyConfig,
-                                libraryOptions,
-                                (contextSpec) => list(contextSpec, input)
-                            )
-                    },
-                    GraphQL: {
-                        client: {
-                            models: {
-                            }
-                        }
                     }
                 }
             }

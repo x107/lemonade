@@ -4,15 +4,11 @@ const { isLoggedIn, isPending } = useCheckLoggedIn();
 
 </script>
 <template>
-
     <div class="overflow-hidden h-screen">
         <Header :isLoggedIn="isLoggedIn" :isLoginPending="isPending" />
 
-        <div class="h-full overflow-scroll">
-            <div class="max-w-4xl mx-auto">
-                <slot />
-            </div>
-
+        <div class="h-full overflow-auto bg-zinc-50">
+            <slot />
         </div>
     </div>
 

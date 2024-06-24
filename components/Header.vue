@@ -14,7 +14,9 @@ defineProps({
                 </span>
             </NuxtLink>
 
-            <NuxtLink to="/login">Service Request</NuxtLink>
+            <NuxtLink to="/requests">
+                <button class="btn-secondary btn-compact">See Requests</button>
+            </NuxtLink>
         </div>
     </header>
 </template>

@@ -8,3 +8,44 @@ body {
     line-height: 1;
     font-weight: 400;
 }
+
+.input-group {
+    @apply flex flex-col w-full
+}
+
+.input-group label {
+    @apply capitalize text-lg mb-2 tracking-wide
+}
+
+.input-group input, .input-group textarea {
+    @apply border border-gray-300 rounded py-2 px-6 outline-none focus:border-gray-400
+}
+
+.input-group textarea {
+    /* initial height */
+    @apply h-32 py-6
+}
+
+.input-group select {
+    @apply border border-gray-300 rounded py-2 px-6 outline-none focus:border-gray-400 cursor-pointer bg-gray-100
+}
+
+.page-heading {
+    @apply text-4xl font-bold block
+}
+
+.btn {
+    @apply disabled:opacity-50
+}
+
+.btn-primary {
+    @apply bg-green-600 text-white py-4 px-6 rounded-md cursor-pointer font-medium hover:bg-green-400 transition duration-300
+}
+
+.btn-secondary {
+    @apply bg-gray-200 text-gray-800 py-4 px-6 rounded-md cursor-pointer font-medium hover:bg-gray-300 transition duration-300
+}
+
+.btn-compact {
+    @apply py-2 px-4
+}
