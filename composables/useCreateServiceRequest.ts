@@ -3,8 +3,8 @@ import type { CreateServiceRequestInput } from '~/models/ServiceRequest';
 import { toDate, format } from "date-fns";
 
 export const useCreateServiceRequest = () => {
+    const client = useNuxtApp().$Amplify.GraphQL?.client;
 
-    const client = useNuxtApp().$Amplify.GraphQL.client;
     const status = ref<AsyncDataRequestStatus>();
 
     async function createRequest(input: CreateServiceRequestInput) {
@@ -12,7 +12,7 @@ export const useCreateServiceRequest = () => {
             status.value = 'pending';
             await client.models.Request.create({
                 ...input,
-                creationDate: format(toDate(input.creationDate), "yyyy-MM-dd"),// input.creationDate.toISOString().split('T')[0],
+                creationDate: format(toDate(input.creationDate), "yyyy-MM-dd"),
                 resolutionDate: format(toDate(input.resolutionDate!), "yyyy-MM-dd")
             });
 

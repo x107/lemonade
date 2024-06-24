@@ -52,7 +52,7 @@ npm run dev
 │   └── Header.vue
 │   └── LemonadeDefinition.vue
 ├── composables/
-│   └── useCheckLoggedIn.ts
+│   └── useAuth.ts
 │   └── useCreateServiceRequest.ts
 │   └── useListServiceRequest.ts
 │   └── useStorage.ts

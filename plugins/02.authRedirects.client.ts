@@ -1,11 +1,11 @@
 import { Amplify } from 'aws-amplify';
 import outputs from '~/amplify_outputs.json';
 
-if (import.meta.client) {
+if (import.meta?.client) {
     Amplify.configure(outputs, { ssr: true });
 }
 
-const unprotectedRoutes = ['/', '/about'];
+const unprotectedRoutes = ['/'];
 const loginRoute = '/login';
 
 export default defineNuxtPlugin({
@@ -14,11 +14,11 @@ export default defineNuxtPlugin({
     setup() {
         addRouteMiddleware(
             'AmplifyAuthMiddleware',
-            defineNuxtRouteMiddleware(async (to) => {
+            defineNuxtRouteMiddleware(async (to, from) => {
                 try {
                     // Skip check for unprotected routes
                     if (unprotectedRoutes.includes(to.path)) {
-                        return;
+                        return true;
                     }
 
                     const session = await useNuxtApp().$Amplify.Auth.fetchAuthSession();

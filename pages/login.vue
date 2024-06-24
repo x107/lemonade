@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { isLoggedIn, isPending } = useCheckLoggedIn();
+import { useAuth } from '#imports'
+const { isLoggedIn, isPending } = useAuth();
 
 </script>
 <template>

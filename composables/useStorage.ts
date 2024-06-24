@@ -1,13 +1,13 @@
-import { getUrl } from 'aws-amplify/storage';
 
 export const useStorage = () => {
+    const storage = useNuxtApp().$Amplify?.Storage;
+
     async function getS3Url(path: string, expiresInSeconds: number = 240) {
-        const result = await getUrl({
+        const result = await storage?.getUrl({
             path,
             options: {
                 validateObjectExistence: false,
                 expiresIn: expiresInSeconds,
-                // useAccelerateEndpoint: true
             }
         });
 
