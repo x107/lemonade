@@ -4,9 +4,9 @@ import {
     fetchAuthSession,
     fetchUserAttributes,
     signIn,
-    signOut
+    signOut,
 } from 'aws-amplify/auth';
-import { list } from 'aws-amplify/storage';
+import { getUrl } from 'aws-amplify/storage';
 import { generateClient } from 'aws-amplify/api';
 import outputs from '../amplify_outputs.json';
 
@@ -28,7 +28,7 @@ export default defineNuxtPlugin({
                         signOut
                     },
                     Storage: {
-                        list
+                        getUrl
                     },
                     GraphQL: {
                         client

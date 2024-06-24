@@ -3,7 +3,7 @@ import type { QuickViewServiceRequest } from '~/models/ServiceRequest';
 
 export const useListServiceRequest = () => {
 
-    const client = useNuxtApp().$Amplify.GraphQL.client;
+    const client = useNuxtApp().$Amplify.GraphQL?.client;
 
     const status = ref<AsyncDataRequestStatus>();
     const items = ref<QuickViewServiceRequest[]>([]);
@@ -11,14 +11,14 @@ export const useListServiceRequest = () => {
     const nextPage = ref<string | null | undefined>();
     const hasMore = computed(() => nextPage.value !== null);
 
-    const unsubscribe = client.models.Request.onCreate().subscribe({
+    const unsubscribe = client?.models.Request.onCreate().subscribe({
         next: (item) => {
             items.value = [mapItem(item), ...items.value];
         }
     });
 
     onUnmounted(() => {
-        unsubscribe.unsubscribe();
+        unsubscribe?.unsubscribe();
     });
 
     async function listRequests() {
