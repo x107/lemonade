@@ -28,7 +28,7 @@ export const serviceRequestInputValidationSchema: Schema = object({
     name: string().required().max(serviceRequestNameMaxLength),
     description: string().required().max(serviceRequestDescriptionMaxLength),
     severity: string().required().default('low'),
-    creationDate: date().required().default(new Date()),
+    creationDate: date().required(),
     resolutionDate: date().required(),
     reporterName: string().required(),
     reporterEmail: string().required().email(),

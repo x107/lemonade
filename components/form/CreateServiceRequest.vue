@@ -3,7 +3,7 @@ import { Severity } from '~/amplify/data/enums/severity';
 import type { CreateServiceRequestInput } from '~/models/ServiceRequest';
 import { serviceRequestInputValidationSchema, serviceRequestDescriptionMaxLength, serviceRequestNameMaxLength, severityLabels } from '~/models/ServiceRequest';
 import { useForm } from 'vee-validate';
-import { format, toDate, formatDistanceToNow } from 'date-fns';
+import { format, toDate } from 'date-fns';
 const emit = defineEmits(['submitted'])
 
 import { useCreateServiceRequest } from '~/composables/useCreateServiceRequest';
@@ -63,7 +63,7 @@ watch(() => [creationDate, severity], ([creationDate, severity]) => {
             <textarea v-model="description" id="description"
                 placeholder="When user tries to upload specific files, they are getting a timeout error" />
             <span class="self-end">{{ description?.length ?? 0 }} / {{ serviceRequestDescriptionMaxLength }}</span>
-            <span class="input-error">{{ errors.name }}</span>
+            <span class="input-error">{{ errors.description }}</span>
         </div>
 
         <div class="border rounded-md pt-7 pb-6 px-10 flex flex-col gap-6 bg-white">
@@ -73,6 +73,7 @@ watch(() => [creationDate, severity], ([creationDate, severity]) => {
                 <div class="input-group">
                     <label for="creationDate">Creation Date</label>
                     <input v-model="creationDate" id="creationDate" type="date" />
+                    <span class="input-error">{{ errors.creationDate }} </span>
                 </div>
                 <div class="input-group">
                     <label for="severity">Severity</label>

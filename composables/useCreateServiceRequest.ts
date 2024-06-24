@@ -17,7 +17,6 @@ export const useCreateServiceRequest = () => {
             });
 
             status.value = 'success';
-
         } catch (error) {
             console.error(error);
             status.value = 'error';
