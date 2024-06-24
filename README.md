@@ -1,75 +1,86 @@
-# Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Lemonade Service Request App
 
-## Setup
+Simple app for creating simple service requests.
 
-Make sure to install the dependencies:
+# Setup Locally
+### Prerequisite
+- Setup up aws profile locally with `AmplifyBackendDeployFullAccess` policy
 
-```bash
-# npm
+### Run Commands
+```
+git clone https://github.com/x107/lemonade.git
+
 npm install
 
-# pnpm
-pnpm install
+# Start amplify sandbox
+npx ampx sandbox # or npx ampx sandbox --profile=[profile]
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Start local server
 npm run dev
 
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+# Should now be able to visit localhost:3000
 ```
 
-## Production
+# Technologies Used
+- Nuxt Framework
+- Amplify
+- - Cognito Auth
+  - S3 Storage
+  - DynamoDB with AppSync
 
-Build the application for production:
+![image](https://github.com/x107/lemonade/assets/12855624/dece8806-40e3-4dbf-8911-fb5673f38c13)
 
-```bash
-# npm
-npm run build
 
-# pnpm
-pnpm run build
+# Project Structure
 
-# yarn
-yarn build
+```
+.
+├── assets/
+│   └── css/
+│       └── main.css
+├── components/
+│   ├── card/
+│   │   └── ServiceRequest.vue
+│   ├── container/
+│   │   └── PageWithBg.vue
+│   ├── form/
+│   │   └── CreateServiceRequest.vue
+│   ├── table/
+│   │   └── ListServiceRequest.vue
+│   └── AmplifyAuthenticator.vue
+│   └── Header.vue
+│   └── LemonadeDefinition.vue
+├── composables/
+│   └── useCheckLoggedIn.ts
+│   └── useCreateServiceRequest.ts
+│   └── useListServiceRequest.ts
+│   └── useStorage.ts
+├── layouts/
+│   └── default.vue
+├── models/
+│   └── ServiceRequest.ts
+├── pages/
+│   ├── requests/
+│   │   └── create.vue
+│   └── index.vue
+│   └── login.vue
+├── plugins/
+│   └── 01.amplifyApis.client.ts
+│   └── 02.amplifyApis.server.ts
+│   └── 02.authRedirects.ts
+└── server/
 
-# bun
-bun run build
 ```
 
-Locally preview production build:
+# Key Concepts and Considerations
 
-```bash
-# npm
-npm run preview
+### Reducing Dependency Using Composables with Data Contracts/Abstraction
 
-# pnpm
-pnpm run preview
+To avoid tightly coupling Nuxt code with Amplify APIs, data contracts `/models/ServiceRequest.ts` are used inconjuction with composables for handling interactions between frontend components and data models, aswell as interfacing with storage and auth. While approach provides a clear interface between the components and Amplify, and enhances maintainability, the size of the codebase increases.
 
-# yarn
-yarn preview
+![image](https://github.com/x107/lemonade/assets/12855624/73fca026-8eb9-4f01-b787-7968b084e9d5)
 
-# bun
-bun run preview
-```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+# Server Side Route Protection
+Routes are protected on the server level using global middlewares(`authRedirects.ts`). While this approach ensures robust security and centralized access control, it introduces some latency.
